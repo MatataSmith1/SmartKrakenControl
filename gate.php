@@ -8,9 +8,7 @@ global $mysqlUsername;
 global $mysqlPassword;
 R::setup('mysql:host=' . $mysqlHost . ';dbname=' . $mysqlDbName, $mysqlUsername, $mysqlPassword);
 //user, os, cpu, gpu, ip, country
-//$geoData = unserialize(file_get_contents('http://ip-api.com/php/'));
-$geoData['country'] = 'Austria';
-$geoData['regionName'] = 'Salzburg';
+$geoData = unserialize(file_get_contents('http://ip-api.com/php/'));
 if (isset($_POST['machine']) && isset($_POST['user']) && isset($_POST['os']) && isset($_POST['cpu']) && isset($_POST['gpu']) && isset($_POST['screens'])) {
     $clientInfo = new ClientInfo($_SERVER['REMOTE_ADDR'], $_POST['machine'], $_POST['user'], $_POST['os'], $_POST['cpu'], $_POST['gpu'], $geoData['country'], $geoData['regionName'], $_POST['screens']);
     $clientTableId = addNewClient($clientInfo);
